@@ -88,7 +88,11 @@ abstract class ApiResource {
 			{
 				// no surrounding spaces allowed!
 				$dir = trim($dir);
-
+				//Added by Amol to check if version exists and append version directory
+				$version = JFactory::getApplication()->input->get('version', 0);
+				if ($version > 0 && JFolder::exists($dir.'/'.$version))
+					$dir=$dir.'/'.$version;
+					
 				// add to the top of the search dirs
 				// so that custom paths are searched before core paths
 				array_unshift($paths, $dir);
